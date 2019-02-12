@@ -9,7 +9,7 @@ public class Mark {
 	@Id
 	@GeneratedValue
 	private Long id;
-	private String email;
+	private String description;
 	private Double score;
 
 	public Mark() {
@@ -19,7 +19,7 @@ public class Mark {
 	public Mark(Long id, String description, Double score) {
 		super();
 		this.id = id;
-		this.email = description;
+		this.description = description;
 		this.score = score;
 	}
 
@@ -31,12 +31,12 @@ public class Mark {
 		this.id = id;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setDescription(String email) {
+		this.description = email;
 	}
 
 	public Double getScore() {
@@ -49,7 +49,7 @@ public class Mark {
 
 	@Override
 	public String toString() {
-		return "Mark [id=" + id + ", email=" + email + ", score=" + score + "]";
+		return "Mark [id=" + id + ", email=" + description + ", score=" + score + "]";
 	}
 
 }
