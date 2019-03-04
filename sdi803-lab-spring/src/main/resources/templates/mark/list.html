@@ -20,10 +20,8 @@
 		<p>Las notas que actualmente figuran en el sistema son las
 			siguientes:</p>
 		<button type="button" id="updateButton" class="btn btn-default">Actualizar</button>
-		<script>
-			$("#updateButton").click(function() {
-				$("#tableMarks").load('/mark/list/update');
-			});
+		<script th:inline="javascript">/*<![CDATA[*/
+		$( "#updateButton").click(function() {varnumberPage = [[${param.page}]];varurlUpdate = '/mark/list/update';if(numberPage != null){urlUpdate += "?page="+numberPage[0];}$("#tableMarks").load(urlUpdate);});/*]]>*/
 		</script>
 
 		<div class="table-responsive">
@@ -61,10 +59,12 @@
 																			"/mark/[[${mark.id}]]/noresend",
 																			function(
 																					data) {
-																				$(
-																						"#tableMarks")
-																						.load(
-																								'/mark/list/update');
+																				var numberPage =[[${param.page}]];
+																				var urlUpdate ='/mark/list/update';
+																				if(numberPage !=null){
+																					urlUpdate +="?page="+numberPage[0];
+																					}
+																				$("#tableMarks").load(urlUpdate);
 																			});
 														});/*]]>*/
 									</script>
@@ -82,10 +82,12 @@
 																			"/mark/[[${mark.id}]]/resend",
 																			function(
 																					data) {
-																				$(
-																						"#tableMarks")
-																						.load(
-																								'/mark/list/update');
+																				var numberPage =[[${param.page}]];
+																				var urlUpdate ='/mark/list/update';
+																				if(numberPage !=null){
+																					urlUpdate +="?page="+numberPage[0];
+																					}
+																				$("#tableMarks").load(urlUpdate);
 																			});
 														});/*]]>*/
 									</script>
@@ -97,6 +99,7 @@
 				</tbody>
 			</table>
 		</div>
+		<footer th:replace="fragments/pagination" />
 	</div>
 </body>
 
