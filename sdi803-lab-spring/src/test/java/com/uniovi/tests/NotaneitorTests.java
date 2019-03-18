@@ -234,4 +234,36 @@ public class NotaneitorTests {
 		PO_HomeView.clickOption(driver, "logout", "text", "Identifícate");
 	}
 
+	@Test
+	public void PR15() {
+		// Vamosalformulariodelogueo.
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		// Rellenamosel formulario
+		PO_LoginView.fillForm(driver, "99999993D", "123456");
+		// COmprobamos queentramosenlapaginaprivadadelProfesor
+		PO_View.checkElement(driver, "text", "99999993D");
+		// Pinchamosenlaopcióndemenu deNotas: //li[contains(@id, 'marks-­‐menu')]/a
+		List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'marks-menu')]/a");
+		elementos.get(0).click();
+		// Pinchamosenlaopcióndelistadenotas.
+		elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, 'mark/list')]");
+		elementos.get(0).click();
+		// Esperamosa quesemuestrenlosenlacesdepaginacionlalistadenotas
+		elementos = PO_View.checkElement(driver, "free", "//a[contains(@class, 'page-link')]");
+		// Nosvamosa laúltimapágina
+		elementos.get(3).click();
+		// Esperamosa queaparezcalaNuevanotaenlaultimapagina
+		// Y Pinchamosenel enlacedeborradodelaNota"NotaNueva1"//td[contains(text(),
+		// 'NotaNueva1')]/following-­‐sibling::*/a[contains(text(), 'mark/delete')]"
+		elementos = PO_View.checkElement(driver, "free",
+				"//td[contains(text(), '15')]");
+		elementos.get(0).click();
+		// Volvemosa laúltimapagina
+		elementos = PO_View.checkElement(driver, "free", "//a[contains(@class, 'page-link')]");
+		elementos.get(3).click();// Y esperamosa queNO aparezcalaultima"NuevaNota1"
+		SeleniumUtils.EsperaCargaPaginaNoTexto(driver, "Nota Nueva 1", PO_View.getTimeout());
+		// Ahoranosdesconectamos
+		PO_HomeView.clickOption(driver, "logout", "text", "Identifícate");
+	}
+
 }
